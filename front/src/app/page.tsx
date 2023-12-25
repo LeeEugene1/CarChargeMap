@@ -9,7 +9,9 @@ declare global {
 
 
 export default function Home() {
-    const onLoadFunc = () => {
+    const onLoadFunc = async () => {
+        const res = await fetch('/store').then(e => e.json())
+        console.log(res)
         window.kakao.maps.load(function () {
         const mapContainer = document.getElementById('map'), // 지도를 표시할 div
             mapOption = {
