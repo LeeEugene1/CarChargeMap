@@ -14,19 +14,32 @@ require('dotenv').config({ path: path.join(__dirname, '.env') });
 app.use(cors())
 app.use(cookieParser());
 
-// 라우팅
-app.use('/',async(req,res)=>{
-	// res.send('hello, world!')
-    await axdata('중구',(err))
-})
 app.use(express.json({ limit: "50mb" }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false, limit: "50mb" }));
 app.use(express.urlencoded({ extended: true }));
 
-//라우팅 + get,post 메소드
-app.get('/',(req,res)=>{
-	res.send('GET')
+app.get('/store',async (req,res)=>{
+    const baseUrl = "api.odcloud.kr/api";
+    let url = `https://api.odcloud.kr/api/15119741/v1/uddi:fe904caf-636f-4a49-aa94-e9064a446b3e?page=1&perPage=10&serviceKey=${process.env.API_KEY}`;
+    try {
+        const result = await fetch(url, {
+          method: "GET",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          }
+        }).then(e => e.json())
+        
+        return res.status(200).json({
+          message: "success!",
+          result,
+        });
+    } catch (e) {
+        console.log(e);
+        res.status(403).json({message: e.message})
+    }
+    
 })
 
 app.post('/auth',
