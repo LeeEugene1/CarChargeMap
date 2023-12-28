@@ -21,7 +21,8 @@ app.use(express.urlencoded({ extended: true }));
 
 app.get('/store',async (req,res)=>{
     const baseUrl = "api.odcloud.kr/api";
-    let url = `https://api.odcloud.kr/api/15119741/v1/uddi:fe904caf-636f-4a49-aa94-e9064a446b3e?page=1&perPage=10&serviceKey=${process.env.API_KEY}`;
+    let url = `http://openapi.kepco.co.kr/service/EvInfoServiceV2/getEvSearchList?serviceKey=${serviceKey}&pageNo=1&numOfRows=10`;
+    // let url = `https://api.odcloud.kr/api/15119741/v1/uddi:fe904caf-636f-4a49-aa94-e9064a446b3e?page=1&perPage=10&serviceKey=${process.env.API_KEY}`;
     try {
         const result = await fetch(url, {
           method: "GET",
