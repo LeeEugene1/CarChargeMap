@@ -29,8 +29,8 @@ export default function Home() {
 
       // 마커가 표시될 위치입니다
       const markerPosition = new window.kakao.maps.LatLng(
-        33.450701,
-        126.570667
+        DEFAULT_LAT,
+        DEFAULT_LNG
       );
 
       // 마커를 생성합니다
@@ -41,20 +41,27 @@ export default function Home() {
       // 마커가 지도 위에 표시되도록 설정합니다
       marker.setMap(map);
 
-      // 아래 코드는 지도 위의 마커를 제거하는 코드입니다
-      // marker.setMap(null);
-
       // 커스텀 오버레이가 표시될 위치입니다
       const position = new window.kakao.maps.LatLng(DEFAULT_LAT, DEFAULT_LNG);
       const content =
-        '<div class ="label"><span class="left"></span><span class="center">카카오!</span><span class="right"></span></div>';
+        '<div class ="infowindow">카카오!!!!!!</div>';
 
       // 커스텀 오버레이를 생성합니다
       const customOverlay = new window.kakao.maps.CustomOverlay({
         position: position,
         content: content,
+        xAnchor:0.6,
+        yAnchor:0.91,
       });
-      customOverlay.setMap(map);
+
+      window.kakao.maps.event.addListener(marker,'mouseover',()=>{
+        customOverlay.setMap(map)
+      })
+
+      window.kakao.maps.event.addListener(marker,'mouseout',()=>{
+        customOverlay.setMap(null)
+      })
+
     });
   };
   return (

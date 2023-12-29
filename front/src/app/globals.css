@@ -30,6 +30,10 @@
   @apply pt-[52px];
 }
 
+.infowindow{
+    @apply bg-blue-900 text-white block text-sm text-center h-6 rounded-md px-2 leading-6;
+}
+
 @media only screen and (max-width: 600px){
   .navbar--mobile{
     @apply fixed w-full text-white h-screen top-[52px] bg-blue-800;
