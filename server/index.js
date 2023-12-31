@@ -20,19 +20,35 @@ app.use(express.urlencoded({ extended: false, limit: "50mb" }));
 app.use(express.urlencoded({ extended: true }));
 
 app.get('/store',async (req,res)=>{
-    let url = `http://openapi.kepco.co.kr/service/EvInfoServiceV2/getEvSearchList?serviceKey=${process.env.API_KEY}&pageNo=1&numOfRows=10`;
-    // let url = `https://api.odcloud.kr/api/15119741/v1/uddi:fe904caf-636f-4a49-aa94-e9064a446b3e?page=1&perPage=10&serviceKey=${process.env.API_KEY}`;
+    // let url = `http://openapi.kepco.co.kr/service/EvInfoServiceV2/getEvSearchList?serviceKey=${process.env.API_KEY}&pageNo=1&numOfRows=10`;
+    const getAddress = `https://api.odcloud.kr/api/15119741/v1/uddi:fe904caf-636f-4a49-aa94-e9064a446b3e?page=1&perPage=10&serviceKey=${process.env.API_KEY}`;
+    const getLocationUrl = `https://dapi.kakao.com/v2/local/search/address.json`
     try {
-        const result = await fetch(url, {
+        let result = await fetch(getAddress, {
           method: "GET",
           headers: {
             Accept: "application/json",
             "Content-Type": "application/json",
           }
         }).then(e => e.json())
-        
+
+        for(const e of result.data){
+            let address = encodeURI(e['주소'])
+            let result2 = await fetch(
+            `${getLocationUrl}?query=${address}`,
+            {
+                method: 'GET',
+                headers: {
+                'Content-Type': 'application/json',
+                Authorization: `KakaoAK ${process.env.KAKAO_REST}`,
+                },
+            }
+            ).then((e) => e.json());
+
+            e['x'] = result2.documents[0]?.x || ''
+            e['y'] = result2.documents[0]?.y || ''
+        }
         return res.status(200).json({
-          message: "success!",
           result,
         });
     } catch (e) {
