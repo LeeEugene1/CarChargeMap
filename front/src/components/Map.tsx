@@ -13,16 +13,13 @@ interface MapProps {
   setMap: Dispatch<SetStateAction<any>>;
 }
 
-const DEFAULT_LAT = 37.497625203;
-const DEFAULT_LNG = 127.03088379;
+const DEFAULT_LAT = 37.5052805568865;
+const DEFAULT_LNG = 127.028919391781;
 export default function Map({ setMap }: MapProps) {
   const handleClickMap = (e) => {
     console.log(e);
   };
   const onLoadFunc = async () => {
-    const { result } = await fetch('/store').then((e) => e.json());
-    console.log(result);
-
     window.kakao.maps.load(function () {
       const mapContainer = document.getElementById('map'), // 지도를 표시할 div
         mapOption = {
