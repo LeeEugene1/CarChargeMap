@@ -1,15 +1,18 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, Dispatch, SetStateAction, useCallback } from 'react';
 interface MarkerProps {
   map: any;
+  // storeDatas: any[];
+  setCurrentStore: Dispatch<SetStateAction<any>>;
 }
+
 // const DEFAULT_LAT = 37.497625203;
 // const DEFAULT_LNG = 127.03088379;
-export default function Markers({ map }: MarkerProps) {
-  const onLoadMarkers = async () => {
+export default function Markers({ map, setCurrentStore }: MarkerProps) {
+  const onLoadMarkers = useCallback(async () => {
     const { result } = await fetch('/store').then((e) => e.json());
-    result.data?.map((e) => {
+    result.data?.map((store: any) => {
       // 마커가 표시될 위치입니다
-      const markerPosition = new window.kakao.maps.LatLng(e.y, e.x);
+      const markerPosition = new window.kakao.maps.LatLng(store.y, store.x);
 
       // 마커를 생성합니다
       const marker = new window.kakao.maps.Marker({
@@ -20,7 +23,7 @@ export default function Markers({ map }: MarkerProps) {
       marker.setMap(map);
 
       // 커스텀 오버레이가 표시될 위치입니다
-      const position = new window.kakao.maps.LatLng(e.y, e.x);
+      const position = new window.kakao.maps.LatLng(store.y, store.x);
       const content = '<div class ="infowindow">카카오!!!!!!</div>';
 
       // 커스텀 오버레이를 생성합니다
@@ -38,12 +41,16 @@ export default function Markers({ map }: MarkerProps) {
       window.kakao.maps.event.addListener(marker, 'mouseout', () => {
         customOverlay.setMap(null);
       });
+
+      window.kakao.maps.event.addListener(marker, 'click', () => {
+        setCurrentStore(store);
+      });
     });
-  };
+  }, [map, setCurrentStore]);
   useEffect(() => {
     if (map) {
       onLoadMarkers();
     }
-  }, [map]);
+  }, [onLoadMarkers, map]);
   return <></>;
 }

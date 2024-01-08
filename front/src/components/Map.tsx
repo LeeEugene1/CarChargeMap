@@ -16,9 +16,6 @@ interface MapProps {
 const DEFAULT_LAT = 37.5052805568865;
 const DEFAULT_LNG = 127.028919391781;
 export default function Map({ setMap }: MapProps) {
-  const handleClickMap = (e) => {
-    console.log(e);
-  };
   const onLoadFunc = async () => {
     window.kakao.maps.load(function () {
       const mapContainer = document.getElementById('map'), // 지도를 표시할 div
@@ -39,11 +36,7 @@ export default function Map({ setMap }: MapProps) {
         src={`//dapi.kakao.com/v2/maps/sdk.js?appkey=${process.env.NEXT_PUBLIC_KAKAO_MAP}&autoload=false`}
         onLoad={() => onLoadFunc()}
       ></Script>
-      <div
-        id="map"
-        className="w-full h-screen"
-        onClick={(e) => handleClickMap(e)}
-      ></div>
+      <div id="map" className="w-full h-screen"></div>
     </>
   );
 }
