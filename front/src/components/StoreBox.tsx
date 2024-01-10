@@ -1,10 +1,13 @@
+'use client';
+
+import { currentStoreState } from '@/atom';
 import React, { Dispatch, SetStateAction } from 'react';
 import { AiOutlineClose } from 'react-icons/ai';
-interface StoreBoxProps {
-  store: any;
-  setStore: Dispatch<SetStateAction<any>>;
-}
-export default function StoreBox({ store, setStore }: StoreBoxProps) {
+import { useRecoilValue, useSetRecoilState } from 'recoil';
+
+export default function StoreBox() {
+  const store = useRecoilValue(currentStoreState);
+  const setStore = useSetRecoilState(currentStoreState);
   return (
     <div className="fixed transition ease-in-out delay-150 inset-x-0 mx-auto bottom-20 roundeed-lg shadow-lg max-w-sm md:max-w-xl z-10 w-full bg-white">
       {store && (

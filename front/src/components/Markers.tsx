@@ -1,13 +1,12 @@
+'use client';
+import { currentStoreState, mapState } from '@/atom';
 import React, { useEffect, Dispatch, SetStateAction, useCallback } from 'react';
-interface MarkerProps {
-  map: any;
-  // storeDatas: any[];
-  setCurrentStore: Dispatch<SetStateAction<any>>;
-}
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 
-// const DEFAULT_LAT = 37.497625203;
-// const DEFAULT_LNG = 127.03088379;
-export default function Markers({ map, setCurrentStore }: MarkerProps) {
+export default function Markers() {
+  const map = useRecoilValue(mapState);
+  const setCurrentStore = useSetRecoilState(currentStoreState);
+
   const onLoadMarkers = useCallback(async () => {
     const { result } = await fetch('/store').then((e) => e.json());
     result.data?.map((store: any) => {

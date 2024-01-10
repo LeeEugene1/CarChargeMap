@@ -1,7 +1,8 @@
 'use client';
 
-import { Dispatch, SetStateAction } from 'react';
 import Script from 'next/script';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { currentStoreState, locationState, mapState } from '@/atom';
 
 declare global {
   interface Window {
@@ -10,22 +11,29 @@ declare global {
 }
 
 interface MapProps {
-  setMap: Dispatch<SetStateAction<any>>;
+  lat: number | string;
+  lng: number | string;
 }
 
-const DEFAULT_LAT = 37.5052805568865;
-const DEFAULT_LNG = 127.028919391781;
-export default function Map({ setMap }: MapProps) {
+export default function Map() {
+  const store = useRecoilValue(currentStoreState);
+  const setMap = useSetRecoilState(mapState);
+  const location = useRecoilValue(locationState);
+  // if (store) {
+  //   console.log('st', store.x, store.y);
+  // }
   const onLoadFunc = async () => {
     window.kakao.maps.load(function () {
       const mapContainer = document.getElementById('map'), // 지도를 표시할 div
         mapOption = {
-          center: new window.kakao.maps.LatLng(DEFAULT_LAT, DEFAULT_LNG), // 지도의 중심좌표
+          center: new window.kakao.maps.LatLng(
+            store ? store.x : location.lat,
+            store ? store.y : location.lng
+          ), // 지도의 중심좌표
           level: 3, // 지도의 확대 레벨
         };
       // v3가 모두 로드된 후, 이 콜백 함수가 실행됩니다.
       const map = new window.kakao.maps.Map(mapContainer, mapOption);
-
       setMap(map);
     });
   };
