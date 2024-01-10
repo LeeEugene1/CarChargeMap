@@ -3,12 +3,22 @@ import { currentStoreState, mapState } from '@/atom';
 import React, { useEffect, Dispatch, SetStateAction, useCallback } from 'react';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 
-export default function Markers() {
+interface dataProps {
+  result: {
+    currentCount: number;
+    data: [any];
+    page: number;
+    perPage: number;
+    totalCount: number;
+    matchCount: number;
+  };
+}
+
+export default function Markers({ result }: dataProps) {
   const map = useRecoilValue(mapState);
   const setCurrentStore = useSetRecoilState(currentStoreState);
 
   const onLoadMarkers = useCallback(async () => {
-    const { result } = await fetch('/store').then((e) => e.json());
     result.data?.map((store: any) => {
       // 마커가 표시될 위치입니다
       const markerPosition = new window.kakao.maps.LatLng(store.y, store.x);
