@@ -4,7 +4,9 @@ import StoreBox from '@/components/StoreBox';
 
 //ssr
 async function getData() {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER}/store`);
+  const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER}/store`, {
+    cache: 'no-store', //테스트중
+  });
   // The return value is *not* serialized
   // You can return Date, Map, Set, etc.
 
@@ -16,11 +18,11 @@ async function getData() {
   return res.json();
 }
 export default async function Home() {
-  const { result } = await getData();
+  const { response } = await getData();
   return (
     <>
       <Map />
-      <Markers result={result} />
+      <Markers result={response.body} />
       <StoreBox />
     </>
   );

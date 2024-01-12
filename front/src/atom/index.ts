@@ -1,8 +1,8 @@
 import { CurrentStoreType, LocationType } from "@/interface";
 import { atom } from "recoil";
 
-const DEFAULT_LAT = 37.5052805568865;
-const DEFAULT_LNG = 127.028919391781;
+const DEFAULT_LAT = 37.565199;
+const DEFAULT_LNG = 126.983339;
 
 export const mapState = atom({
     key:"map",

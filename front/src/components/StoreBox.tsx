@@ -16,9 +16,17 @@ export default function StoreBox() {
             <div className="flex justify-between items-start">
               <div className="flex gap-5 items-center">
                 <div>
-                  <p className="text-lg">{store['충전소명']}</p>
-                  <div className="font-semibold">{store['시설구분(소)']}</div>
-                  <div className="text-sm">{store['주소']}</div>
+                  <h1 className="font-semibold">
+                    {store.kakaoAddress
+                      ? store.kakaoAddress.road_address.building_name
+                      : ''}
+                  </h1>
+                  <h2 className="text-lg">
+                    {store.kakaoAddress
+                      ? store.kakaoAddress.address.address_name
+                      : store.csNm}
+                  </h2>
+                  <p className="text-sm">{store.addr}</p>
                 </div>
               </div>
               <button type="button" onClick={() => setStore(null)}>

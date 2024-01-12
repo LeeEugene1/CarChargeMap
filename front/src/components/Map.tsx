@@ -10,25 +10,17 @@ declare global {
   }
 }
 
-interface MapProps {
-  lat: number | string;
-  lng: number | string;
-}
-
 export default function Map() {
   const store = useRecoilValue(currentStoreState);
   const setMap = useSetRecoilState(mapState);
   const location = useRecoilValue(locationState);
-  // if (store) {
-  //   console.log('st', store.x, store.y);
-  // }
   const onLoadFunc = async () => {
     window.kakao.maps.load(function () {
       const mapContainer = document.getElementById('map'), // 지도를 표시할 div
         mapOption = {
           center: new window.kakao.maps.LatLng(
-            store ? store.x : location.lat,
-            store ? store.y : location.lng
+            store ? store.lat : location.lat,
+            store ? store.longi : location.lng
           ), // 지도의 중심좌표
           level: 3, // 지도의 확대 레벨
         };
