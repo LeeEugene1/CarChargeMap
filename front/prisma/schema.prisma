@@ -1,0 +1,43 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+//npx prisma migrate dev --name init
+//npx prisma studio
+//https://www.prisma.io/docs/orm/prisma-migrate/workflows/seeding#how-to-seed-your-database-in-prisma
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  email     String   @unique
+  name      String?
+}
+
+model Store {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime? @updatedAt
+    
+  authorId  Int?
+
+  addr     String   @db.VarChar(255)
+  chargeTp Int
+  cpId     Int
+  cpNm     String   @db.VarChar(255)
+  cpStat    Int
+  cpTp      Int
+  csId      Int
+  csNm      String   @db.VarChar(50)
+  lat       Int
+  longi     Int
+  statUpdateDatetime   String   @db.VarChar(50)
+  kakaoAddress         Json?     // JSONB로 변경
+}

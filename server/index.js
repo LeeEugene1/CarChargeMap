@@ -20,7 +20,8 @@ app.use(express.urlencoded({ extended: false, limit: "50mb" }));
 app.use(express.urlencoded({ extended: true }));
 
 app.get('/store',async (req,res)=>{
-    const getAddress = `http://openapi.kepco.co.kr/service/EvInfoServiceV2/getEvSearchList?serviceKey=${process.env.API_KEY}&pageNo=1&numOfRows=10`;
+    addr = encodeURI('서울')
+    const getAddress = `http://openapi.kepco.co.kr/service/EvInfoServiceV2/getEvSearchList?serviceKey=${process.env.API_KEY}&pageNo=1&numOfRows=350&addr=${addr}`;//&pageNo=1&numOfRows=100&addr=${addr}
     // const getAddress = `https://api.odcloud.kr/api/15119741/v1/uddi:fe904caf-636f-4a49-aa94-e9064a446b3e?page=1&perPage=10&serviceKey=${process.env.API_KEY}`;
     const getLocationUrl = `https://dapi.kakao.com/v2/local/search/address.json`
     try {
