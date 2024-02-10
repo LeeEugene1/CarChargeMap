@@ -22,22 +22,22 @@ model User {
 }
 
 model Store {
-  id        Int      @id @default(autoincrement())
-  createdAt DateTime @default(now())
+  id        Int       @id @default(autoincrement())
+  createdAt DateTime  @default(now())
   updatedAt DateTime? @updatedAt
-    
-  authorId  Int?
 
-  addr     String   @db.VarChar(255)
-  chargeTp Int
-  cpId     Int
-  cpNm     String   @db.VarChar(255)
-  cpStat    Int
-  cpTp      Int
-  csId      Int
-  csNm      String   @db.VarChar(50)
-  lat       Int
-  longi     Int
-  statUpdateDatetime   String   @db.VarChar(50)
-  kakaoAddress         Json?     // JSONB로 변경
+  // authorId Int?
+
+  addr               String @db.VarChar(255)
+  chargeTp           Int
+  cpId               Int
+  cpNm               String @db.VarChar(255)
+  cpStat             Int
+  cpTp               Int
+  csId               Int
+  csNm               String @db.VarChar(50)
+  lat                Int
+  longi              Int
+  statUpdateDatetime String @db.VarChar(50)
+  kakaoAddress       String
 }

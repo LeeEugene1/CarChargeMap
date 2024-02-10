@@ -15,16 +15,16 @@ async function seedData() {
             cpTp: store?.cpTp,
             csId: store?.csId,
             csNm: store?.csNm,
-            lat: store?.lat,
-            longi: store?.longi,
+            lat: Number(store?.lat),
+            longi: Number(store?.longi),
             statUpdateDatetime: store?.statUpdateDatetime,
             kakaoAddress: JSON.stringify(store?.kakaoAddress)
         }
         const res = await prisma.store.create({
-            data: storeData,
-        })
+            data: storeData
+        });
         console.log(res)
-    })
+    });
 }  
 
 async function main(){
@@ -43,5 +43,5 @@ main()
     prisma.$disconnect()
   })
 
-  //npx prisma db seed
+//npx prisma db seed
   
