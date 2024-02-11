@@ -5,7 +5,7 @@ import StoreBox from '@/components/StoreBox';
 //ssr
 async function getData() {
   try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER}/store`, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER}/api/stores`, {
       cache: 'no-store', //테스트중
     });
 
@@ -23,11 +23,11 @@ async function getData() {
   }
 }
 export default async function Home() {
-  const { response } = await getData();
+  const response = await getData();
   return (
     <>
       <Map />
-      <Markers result={response.body} />
+      <Markers result={response} />
       <StoreBox />
     </>
   );

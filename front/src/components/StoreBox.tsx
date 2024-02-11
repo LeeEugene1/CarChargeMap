@@ -17,9 +17,7 @@ export default function StoreBox() {
               <div className="flex gap-5 items-center">
                 <div>
                   <h1 className="font-semibold">
-                    {store.kakaoAddress
-                      ? store.kakaoAddress.road_address.building_name
-                      : ''}
+                    {store?.kakaoAddress?.road_address?.building_name ?? ''}
                   </h1>
                   <h2 className="text-lg">
                     {store.kakaoAddress
