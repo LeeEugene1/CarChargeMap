@@ -13,6 +13,9 @@
   },
   "dependencies": {
     "@prisma/client": "^5.8.0",
+    "@tanstack/react-query": "^5.20.1",
+    "@tanstack/react-query-devtools": "^5.20.1",
+    "axios": "^1.6.7",
     "next": "14.0.4",
     "react": "^18",
     "react-dom": "^18",
