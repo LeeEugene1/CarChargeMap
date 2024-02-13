@@ -10,5 +10,6 @@
 <img width="1440" alt="Screen Shot 2024-01-12 at 8 11 26 PM" src="https://github.com/LeeEugene1/CarChargeMap/assets/59987309/80c9bfe2-0b53-421d-91a4-94bfb546579a">
 
 ## Stack
-- Front: nextjs 14(App router SSR), Tailwind css, Typescript
-- Backend: Nodejs proxy server
+- Front: Nextjs 14(App router SSR), Typescript, Tailwind CSS, React Query, Recoil
+- Backend: Prisma(Nodejs ORM), Supabase
+- Backend(legacy): Nodejs Proxy Server

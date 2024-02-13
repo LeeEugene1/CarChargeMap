@@ -15,12 +15,12 @@ export default function Navbar() {
         <ul className="navbar__list">
           <li>
             <Link href="/stores" className="navbar__list--item">
-              충전소 생성
+              충전소 목록
             </Link>
           </li>
           <li>
             <Link href="/stores/new" className="navbar__list--item">
-              충전소 상세 페이지
+              충전소 추가
             </Link>
           </li>
           <li>
