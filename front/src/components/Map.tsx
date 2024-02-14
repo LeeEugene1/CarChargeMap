@@ -1,8 +1,11 @@
 'use client';
 
 import Script from 'next/script';
+import { usePathname } from 'next/navigation';
+
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { currentStoreState, locationState, mapState } from '@/atom';
+import { useEffect } from 'react';
 
 declare global {
   interface Window {
@@ -11,6 +14,11 @@ declare global {
 }
 
 export default function Map() {
+  const pathname = usePathname();
+  useEffect(() => {
+    onLoadFunc();
+  }, [pathname]);
+
   const store = useRecoilValue(currentStoreState);
   const setMap = useSetRecoilState(mapState);
   const location = useRecoilValue(locationState);
@@ -34,7 +42,7 @@ export default function Map() {
       <Script
         type="text/javascript"
         src={`//dapi.kakao.com/v2/maps/sdk.js?appkey=${process.env.NEXT_PUBLIC_KAKAO_MAP}&autoload=false`}
-        onLoad={() => onLoadFunc()}
+        onLoad={onLoadFunc}
       ></Script>
       <div id="map" className="w-full h-screen"></div>
     </>

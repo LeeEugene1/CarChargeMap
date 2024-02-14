@@ -27,7 +27,6 @@ export default function Markers({ result }: dataProps) {
   const setCurrentStore = useSetRecoilState(currentStoreState);
 
   const onLoadMarkers = useCallback(async () => {
-    debugger;
     result?.map((store: any) => {
       // 마커가 표시될 위치입니다
       const { address } = JSON.parse(store?.kakaoAddress);
