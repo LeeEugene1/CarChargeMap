@@ -1,4 +1,5 @@
 'use client';
+import Loading from '@/components/Loading';
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 
@@ -10,17 +11,19 @@ export default function page() {
   });
   return (
     <div>
-      {isLoading
-        ? 'Loading...'
-        : isError
-        ? 'Error'
-        : data?.data.map((item: any) => {
-            return (
-              <div key={item.id}>
-                [{item.id}]{item.addr}
-              </div>
-            );
-          })}
+      {isLoading ? (
+        <Loading />
+      ) : isError ? (
+        'Error'
+      ) : (
+        data?.data.map((item: any) => {
+          return (
+            <div key={item.id}>
+              [{item.id}]{item.addr}
+            </div>
+          );
+        })
+      )}
     </div>
   );
 }
