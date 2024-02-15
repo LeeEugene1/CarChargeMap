@@ -4,7 +4,7 @@ import { atom } from "recoil";
 const DEFAULT_LAT = 37.565199;
 const DEFAULT_LNG = 126.983339;
 
-export const mapState = atom({
+export const mapState = atom<any>({
     key:"map",
     default:null,
     dangerouslyAllowMutability:true
