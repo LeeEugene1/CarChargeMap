@@ -3,6 +3,7 @@ import Map from '@/components/Map';
 import Markers from '@/components/Markers';
 import StoreBox from '@/components/StoreBox';
 import axios from 'axios';
+import { Toaster } from 'react-hot-toast';
 
 //ssr
 async function getData() {
@@ -30,6 +31,7 @@ export default async function Home() {
       <Markers result={response?.data} />
       <StoreBox />
       <CurrentLocationButton />
+      <Toaster />
     </>
   );
 }
